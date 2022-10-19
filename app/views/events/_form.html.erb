@@ -21,5 +21,9 @@
     <%= f.file_field :thumbnail, class: 'form-control js-file-select-preview mb-3', accept: 'image/*', data: { target: '#preview-target' } %>
     <%= image_tag f.object.decorate.thumbnail, id: 'preview-target', class: 'w-100 border' %>
   </div>
+  <div class="field">
+    <%= f.label"タグ (,で区切ると複数タグ登録できます)" %>
+    <%= f.text_field :name,value: @tag_list,class:"form-control"%>
+  </div>
   <%= f.submit '登録', class: 'btn btn-primary' %>
 <% end %>
