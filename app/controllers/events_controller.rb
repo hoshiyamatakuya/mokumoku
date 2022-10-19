@@ -49,11 +49,14 @@ class EventsController < ApplicationController
 
   def edit
     @event = current_user.events.find(params[:id])
+    @tag_list=@event.tags.pluck(:name).join(',')
   end
 
   def update
     @event = current_user.events.find(params[:id])
+    tag_list=params[:event][:name].split(',')
     if @event.update(event_params)
+      @event.save_tag(tag_list)
       redirect_to event_path(@event)
     else
       render :edit
