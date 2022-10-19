@@ -14,6 +14,11 @@
             <h1>
               <%= @event.title %>
             </h1>
+            <div class="card">
+              <% @event_tags.each do |tag| %>
+                <%=tag.name%>
+              <% end %>
+            </div>
             <% if logged_in? %>
               <div class="ms-auto">
                 <% if current_user.own?(@event) %>
