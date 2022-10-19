@@ -62,6 +62,13 @@ class EventsController < ApplicationController
       render :edit
     end
   end
+  def search_tag
+    @tag_list=Tag.all
+
+    @tag=Tag.find(params[:tag_id])
+
+    @events=@tag.events.page(params[:page]).per(10)
+  end
 
   private
 

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   post 'signup', to: 'users#create'
   resources :users, only: %i[new create]
+  get "search_tag"=>"events#search_tag"
   resources :events do
     collection do
       get :future

@@ -16,7 +16,7 @@
             </h1>
             <div class="card">
               <% @event_tags.each do |tag| %>
-                <%=tag.name%>
+                <%=link_to tag.name,search_tag_path(tag_id: tag.id) %>
               <% end %>
             </div>
             <% if logged_in? %>
