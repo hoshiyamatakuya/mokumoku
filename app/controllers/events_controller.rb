@@ -29,7 +29,9 @@ class EventsController < ApplicationController
 
   def create
     @event = current_user.events.build(event_params)
+    tag_list=params[:event][:name].split(',')
     if @event.save
+      @event.save_tag(tag_list)
       User.all.find_each do |user|
         NotificationFacade.created_event(@event, user)
       end
