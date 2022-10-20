@@ -32,6 +32,15 @@
               <%= f.password_field :password_confirmation, class: 'form-control' %>
             </div>
             <div class="mb-3">
+              <%= f.label :Gender %><br />
+              <%= f.label :LGTM  %>
+              <%= f.radio_button :gender, :LGTM %>
+              <%= f.label :man  %>
+              <%= f.radio_button :gender, :man %>
+              <%= f.label :woman  %>
+              <%= f.radio_button :gender, :woman %>
+            </div>
+            <div class="mb-3">
               <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="agreeCheck">
                 <label class="form-check-label" for="agreeCheck"><span>I agree to the <a href="terms-condition-page.html">Terms of

@@ -1,5 +1,11 @@
 <%= form_with model: event do |f| %>
   <%#= render 'shared/error_messages', object: f.object %>
+  <% if current_user.gender == "woman" %>
+    <div class="mb-3">
+      <%= f.label :only_woman %>
+      <%= f.check_box :only_woman,{} , "yeswoman", "nowoman" %>
+    </div>
+  <% end %>
   <div class="mb-3">
     <%= f.label :title %>
     <%= f.text_field :title, class: 'form-control' %>

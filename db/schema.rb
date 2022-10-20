@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_19_072358) do
+ActiveRecord::Schema.define(version: 2022_10_20_145331) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -70,6 +70,16 @@ ActiveRecord::Schema.define(version: 2022_01_19_072358) do
     t.index ["user_id"], name: "index_event_attendances_on_user_id"
   end
 
+  create_table "event_tags", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id", "tag_id"], name: "index_event_tags_on_event_id_and_tag_id", unique: true
+    t.index ["event_id"], name: "index_event_tags_on_event_id"
+    t.index ["tag_id"], name: "index_event_tags_on_tag_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.string "title", null: false
     t.text "content", null: false
@@ -78,6 +88,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_072358) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "only_woman", default: 0
     t.index ["prefecture_id"], name: "index_events_on_prefecture_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
@@ -109,6 +120,12 @@ ActiveRecord::Schema.define(version: 2022_01_19_072358) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "user_notification_timings", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "notification_timing_id", null: false
@@ -135,6 +152,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_072358) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "gender"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
@@ -146,6 +164,8 @@ ActiveRecord::Schema.define(version: 2022_01_19_072358) do
   add_foreign_key "comments", "users"
   add_foreign_key "event_attendances", "events"
   add_foreign_key "event_attendances", "users"
+  add_foreign_key "event_tags", "events"
+  add_foreign_key "event_tags", "tags"
   add_foreign_key "events", "prefectures"
   add_foreign_key "events", "users"
   add_foreign_key "notifications", "users", column: "receiver_id"
