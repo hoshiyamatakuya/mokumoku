@@ -14,7 +14,7 @@
             <h1>
               <%= @event.title %>
             </h1>
-            <% if @event.only_woman == true %>
+            <% if @event.only_woman? %>
               <h1>"女性限定"</h1>
             <% end %>
             <% if logged_in? %>
@@ -86,7 +86,7 @@
           </h4>
           <hr />
           <div class="text-center">
-            <% if @event.only_woman == true %>
+            <% if @event.only_woman? %>
               <% if current_user.gender == "woman" %>
                 <% if logged_in? %>
                   <% if !current_user.owner?(@event) %>

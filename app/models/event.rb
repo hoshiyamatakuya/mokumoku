@@ -14,7 +14,6 @@ class Event < ApplicationRecord
   scope :future, -> { where('held_at > ?', Time.current) }
   scope :past, -> { where('held_at <= ?', Time.current) }
 
-
   with_options presence: true do
     validates :title
     validates :content
