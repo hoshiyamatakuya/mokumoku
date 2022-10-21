@@ -14,7 +14,7 @@
             <h1>
               <%= @event.title %>
             </h1>
-            <% if @event.only_woman == "yeswoman" %>
+            <% if @event.only_woman == "true" %>
               <h1>"女性限定"</h1>
             <% end %>
             <% if logged_in? %>
