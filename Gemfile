@@ -46,6 +46,9 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'rb-readline'
   gem 'rspec-rails'
+  gem 'simplecov'
+  gem 'capybara'
+  gem 'selenium-webdriver'
 end
 
 group :development do

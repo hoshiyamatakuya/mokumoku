@@ -14,11 +14,11 @@
             <h1>
               <%= @event.title %>
             </h1>
-            <div class="card">
-              <% @event_tags.each do |tag| %>
-                <%=link_to tag.name,search_tag_path(tag_id: tag.id) %>
-              <% end %>
-            </div>
+
+            <% if @event.only_woman? %>
+              <h1>"女性限定"</h1>
+            <% end %>
+
             <% if logged_in? %>
               <div class="ms-auto">
                 <% if current_user.own?(@event) %>
@@ -88,24 +88,12 @@
           </h4>
           <hr />
           <div class="text-center">
-            <% if logged_in? %>
-              <% if !current_user.owner?(@event) %>
-                <% if current_user.attend?(@event) %>
-                  <%= link_to 'キャンセルする',
-                              event_attendance_url(@event),
-                              class: 'btn btn-primary',
-                              method: :delete,
-                              data: { confirm: 'キャンセルします' }
-                  %>
-                <% else %>
-                  <%= link_to 'このもくもく会に参加する',
-                              event_attendance_url(@event),
-                              class: 'btn btn-primary',
-                              method: :post,
-                              data: { confirm: '申し込みます' }
-                  %>
-                <% end %>
+            <% if @event.only_woman? %>
+              <% if current_user.gender == "woman" %>
+                <%= render 'botton', event: @event %>
               <% end %>
+            <% else %>
+              <%= render 'botton', event: @event %>
             <% end %>
           </div>
         </div>
