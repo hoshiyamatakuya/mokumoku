@@ -14,9 +14,11 @@
             <h1>
               <%= @event.title %>
             </h1>
+
             <% if @event.only_woman? %>
               <h1>"女性限定"</h1>
             <% end %>
+
             <% if logged_in? %>
               <div class="ms-auto">
                 <% if current_user.own?(@event) %>
